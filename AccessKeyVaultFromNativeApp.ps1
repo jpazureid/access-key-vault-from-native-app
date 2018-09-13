@@ -48,7 +48,7 @@ if ($null -ne $authResult.AccessToken) {
     #
     # Get Key Vault Key
     #
-    $url = "https://jutakata02keyvault02.vault.azure.net/keys/TestKey?api-version=2016-10-01"
+    $url = "https://$keyvault.vault.azure.net/keys/TestKey?api-version=2016-10-01"
     $result = (Invoke-WebRequest -UseBasicParsing -Headers $headerParams -Uri $url)
     $result.Content
 
