@@ -94,7 +94,7 @@ Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.
 シークレットの作成要求は以下のとおりです。
 
 ```
-PUT https://jutakata02keyvault02.vault.azure.net//secrets/SQLPassword?api-version=2016-10-01 
+PUT https://yourkeyvaultname.vault.azure.net//secrets/SQLPassword?api-version=2016-10-01 
 Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.FDlzA1xpic{省略}Nj_6yECdIw
 ```
 
