@@ -11,7 +11,7 @@ Shows how to access Azure Key Vault from PowerShell
 3. [アプリの登録] を選択します。
 4. [+ 新しいアプリケーションの登録] を選択します。
 5. 名前に任意のものを入力し、アプリケーションの種類は [ネイティブ] を設定します。
-6. サインオン URL にはアプリの応答 URL (urn:ietf:wg:oauth:2.0:oob を設定します。
+6. サインオン URL にはアプリの応答 URL (urn:ietf:wg:oauth:2.0:oob) を設定します。
 7. アプリを作成したら、そのアプリのアプリケーション ID をメモします。
 8. [設定] を選択し、[必要なアクセス許可] を選択します。
 9. [+ 追加] から [Azure Key Vault] を選択します。
@@ -40,7 +40,7 @@ GetAdModuleByNuget.ps1 を実行ください。実行すると Tools フォル�
 - Key Vautl シークレットの作成 (TestSecret)
 - Key Vautl シークレットの読み取り (TestSecret)
 
-それぞれ以下のような結果が出力されることをご確認いただけます。
+それぞれの詳細は以下のとおりです。
 
 ### Key Vault キーの作成と読み取り
 
@@ -51,7 +51,7 @@ POST https://yourkeyvaultname.vault.azure.net//keys/ContosoFirstKey/create?api-v
 Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.FDlzA1xpic{省略}Nj_6yECdIw
 ```
 
-以下の Body を POST 要求で送信しています。
+以下の Body を POST で送信しています。
 
 ```json
 {
@@ -98,7 +98,7 @@ PUT https://jutakata02keyvault02.vault.azure.net//secrets/SQLPassword?api-versio
 Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.FDlzA1xpic{省略}Nj_6yECdIw
 ```
 
-以下の Body を POST 要求で送信しています。
+以下の Body を PUT で送信しています。
 
 ```json
 {
