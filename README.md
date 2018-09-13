@@ -19,7 +19,7 @@ Shows how to access Azure Key Vault from PowerShell
 
 ## アプリの設定内容の変更
 
-KeyVaultforNativeApp.txt を開き、以下の箇所を登録したアプリに合わせて変更します。$tenantId を貴社のテナントに、$clientId を登録したアプリの ID に変更ください。
+AccessKeyVaultforNativeApp.ps1 を開き、以下の箇所を登録したアプリに合わせて変更します。$tenantId を貴社のテナントに、$clientId を登録したアプリの ID に変更ください。
 
 ```powershell
 $tenantId = "yourtenant.onmicrosoft.com" 
@@ -36,6 +36,6 @@ $url = "https://yourkeyvault.vault.azure.net/secrets/SQLPassword?api-version=201
 
 ## アプリの実行
 
-GetModuleByNuget.ps1 を実行ください。実行すると、Tools フォルダーができ、フォルダー内に必要なモジュールが配置されます。本スクリプトは、もう一つの KeyVaultforNativeApp.ps1 の実行に必要なモジュールを取得してくるためのものです。
+GetModuleByNuget.ps1 を実行ください。実行すると、Tools フォルダーができ、フォルダー内に必要なモジュールが配置されます。本スクリプトは、もう一つの AccessKeyVaultforNativeApp.ps1 の実行に必要なモジュールを取得してくるためのものです。
 
-この状態で、事前に内容を貴社に合わせておいた KeyVaultforNativeApp.ps1 を実行ください。認証画面が表示され、サインインすることで、そのユーザーで Key Vault にアクセスします。
+この状態で、事前に内容を貴社に合わせておいた AccessKeyVaultforNativeApp.ps1 を実行ください。認証画面が表示され、サインインすることで、そのユーザーで Key Vault にアクセスします。
