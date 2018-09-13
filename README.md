@@ -11,7 +11,7 @@ Shows how to access Azure Key Vault from PowerShell
 3. [アプリの登録] を選択します。
 4. [+ 新しいアプリケーションの登録] を選択します。
 5. 名前に任意のものを入力し、アプリケーションの種類は [ネイティブ] を設定します。
-6. サインオン URL にはアプリの応答 URL (例として https://localhost を設定します。
+6. サインオン URL にはアプリの応答 URL (urn:ietf:wg:oauth:2.0:oob を設定します。
 7. アプリを作成したら、そのアプリのアプリケーション ID をメモします。
 8. [設定] を選択し、[必要なアクセス許可] を選択します。
 9. [+ 追加] から [Azure Key Vault] を選択します。
@@ -31,9 +31,7 @@ $resource = "https://vault.azure.net"
 
 ## アプリの実行
 
-GetAdModuleByNuget.ps1 を実行ください。実行すると Tools フォルダーができ、フォルダー内に必要なモジュールが配置されます。本スクリプトは、もう一つの AccessKeyVaultFromNativeApp.ps1 の実行に必要なモジュールを取得してくるためのものです。
-
-この状態で、事前に内容を貴社に合わせておいた AccessKeyVaultFromNativeApp.ps1 を実行します。認証画面が表示されますので、Key Vault の処理を行いたいユーザーでサインインすることで、そのユーザーで処理が行われます。
+GetAdModuleByNuget.ps1 を実行ください。実行すると Tools フォルダーができ、フォルダー内に必要なモジュールが配置されます。本スクリプトは、もう一つの AccessKeyVaultFromNativeApp.ps1 の実行に必要なモジュールを取得してくるためのものです。この状態で、事前に内容を貴社に合わせておいた AccessKeyVaultFromNativeApp.ps1 を実行します。認証画面が表示されますので、Key Vault の処理を行いたいユーザーでサインインすることで、そのユーザーで処理が行われます。
 
 本スクリプトでは以下の操作を順に行っています。
 
@@ -46,7 +44,7 @@ GetAdModuleByNuget.ps1 を実行ください。実行すると Tools フォル�
 
 ### Key Vault キーの作成と読み取り
 
-要求は以下のとおりです。
+キーの作成要求は以下のとおりです。
 
 ```
 POST https://yourkeyvaultname.vault.azure.net//keys/ContosoFirstKey/create?api-version=2016-10-01
@@ -64,7 +62,7 @@ Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.
 }
 ```
 
-得られる応答 (出力) は以下のとおりです。
+得られる応答 (読み取り結果) は以下のようになります。
 
 ```json
 {
@@ -79,7 +77,7 @@ Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.
             "wrapKey",
             "unwrapKey"
         ],
-        "n": "tuCbLWITBYLVGnXbFjFv4ns6YYb-XezCMuaQK0FuTPSHZ3p95vGfmB7iWmMvLEzeH4zoGbYtkGxpulMWU5QDfb_GM_N-bB0sjoiqOAj9LusR5ljGB8lmsfZvlu0TKol1Q0cn964Q99L9brI_wa90gt-qkaKFi-8Rs7Vq1BucrXnpAZpkafViz9MNWb_EshUUq424CA_O9UZn_W5jkkbEkvHkhedA3wLoYS9U97yvl6XtvU_P6NRFG7gKRuFDydQ6BqiYWnjAc3FOb1VaFWalt2i9E4LwR8RT5tfAj4bcbAM3aemFp0lZYM0XhtLXzauLDLI3cmkCCDKvKxkZbm_x6Q",
+        "n": "tuCbLWITBYLVGnXbFjFv{省略}I3cmkCCDKvKxkZbm_x6Q",
         "e": "AQAB"
     },
     "attributes": {
@@ -93,7 +91,7 @@ Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.
 
 ### Key Vault シークレットの作成と読み取り
 
-要求は以下のとおりです。
+シークレットの作成要求は以下のとおりです。
 
 ```
 PUT https://jutakata02keyvault02.vault.azure.net//secrets/SQLPassword?api-version=2016-10-01 
@@ -111,7 +109,7 @@ Authorization: Bearer eyJ0eXAiOi{省略}3lISmxZIn0.eyJhdWQiOi{省略}joiMS4wIn0.
 }
 ```
 
-得られる応答 (出力) は以下のとおりです。
+得られる応答 (読み取り結果) は以下のようになります。
 
 ```json
 {
