@@ -3,10 +3,11 @@ Add-Type -Path ".\Tools\Microsoft.IdentityModel.Clients.ActiveDirectory\Microsof
 #
 # Authorization &amp; resource Url
 #
-$tenantId = "yourtenant.onmicrosoft.com" 
+$tenantId = "yourtenant.onmicrosoft.com" # or GUID "01234567-89AB-CDEF-0123-456789ABCDEF"
+$clientId = "FEDCBA98-7654-3210-FEDC-BA9876543210"
+$keyvault = "yourkeyvaultname"
+$redirectUri = "urn:ietf:wg:oauth:2.0:oob"
 $resource = "https://vault.azure.net" 
-$clientId = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX"
-$redirectUri = "https://localhost"
 
 #
 # Authorization Url
@@ -31,11 +32,46 @@ if ($null -ne $authResult.AccessToken) {
     $headerParams = @{'Authorization' = "$($authResult.AccessTokenType) $($authResult.AccessToken)"}
 
     #
-    # Access Key Vault
+    # Create Key Vault Key
     #
-    $url = "https://yourkeyvault.vault.azure.net/secrets/SQLPassword?api-version=2016-10-01"
+    $body = '
+      {
+        "kty": "RSA",
+        "attributes": {
+          "enabled": true
+        }
+      }'
+    $url = "https://$keyvault.vault.azure.net/keys/TestKey/create?api-version=2016-10-01"
+    $result = (Invoke-WebRequest -UseBasicParsing -Headers $headerParams -Uri $url -Method POST -Body $body -ContentType "application/json")
+    $result.Content
+
+    #
+    # Get Key Vault Key
+    #
+    $url = "https://jutakata02keyvault02.vault.azure.net/keys/TestKey?api-version=2016-10-01"
     $result = (Invoke-WebRequest -UseBasicParsing -Headers $headerParams -Uri $url)
-    $secret = ($result.Content | ConvertFrom-Json).value
+    $result.Content
+
+    #
+    # Create Key Vault Secret
+    #
+    $body = '
+      {
+        "value": "Pa$$w0rd",
+        "attributes": {
+          "enabled": true
+        }
+      }'
+    $url = "https://$keyvault.vault.azure.net/secrets/TestSecret?api-version=2016-10-01"
+    $result = (Invoke-WebRequest -UseBasicParsing -Headers $headerParams -Uri $url -Method PUT -Body $body -ContentType "application/json")
+    $result.Content
+    
+    #
+    # Get Key Vault Secret
+    #
+    $url = "https://$keyvault.vault.azure.net/secrets/TestSecret?api-version=2016-10-01"
+    $result = (Invoke-WebRequest -UseBasicParsing -Headers $headerParams -Uri $url)
+    $result.Content
     
     Write-Output "Secret: $secret"
 }
