@@ -2,24 +2,24 @@
 
 Shows how to access Azure Key Vault from PowerShell
 
-## �A�N�Z�X �g�[�N���擾�̂��߂̃A�v���P�[�V�����ݒ�菇
+## アクセス トークン取得のためのアプリケーション設定手順
 
-�܂��́AAzure AD ��Ƀl�C�e�B�u �A�v���P�[�V������o�^���܂��B���łɓo�^�ς݂̏ꍇ�A�쐬�ς݂̃A�v���ɂ��ē��l�̐ݒ�����{�ς݂����m�F���������B
+まずは、Azure AD 上にネイティブ アプリケーションを登録します。すでに登録済みの場合、作成済みのアプリについて同様の設定を実施済みかご確認ください。
 
-1. Azure �|�[�^���ɊǗ��҂ŃT�C���C�����܂��B
-2. [Azure Active Directory] ���J���܂��B
-3. [�A�v���̓o�^] ��I�����܂��B
-4. [+ �V�����A�v���P�[�V�����̓o�^] ��I�����܂��B
-5. ���O�ɔC�ӂ̂��̂���͂��A�A�v���P�[�V�����̎�ނ� [�l�C�e�B�u] ��ݒ肵�܂��B
-6. �T�C���I�� URL �ɂ̓A�v���̉��� URL (��Ƃ��� https://localhost ��ݒ肵�܂��B
-7. �A�v�����쐬������A���̃A�v���̃A�v���P�[�V���� ID ���������܂��B
-8. [�ݒ�] ��I�����A[�K�v�ȃA�N�Z�X����] ��I�����܂��B
-9. [+ �ǉ�] ���� [Azure Key Vault] ��I�����܂��B
-10. [Have full access to the Azure Key Vault service] ��I�����ĕۑ����������܂��B
+1. Azure ポータルに管理者でサインインします。
+2. [Azure Active Directory] を開きます。
+3. [アプリの登録] を選択します。
+4. [+ 新しいアプリケーションの登録] を選択します。
+5. 名前に任意のものを入力し、アプリケーションの種類は [ネイティブ] を設定します。
+6. サインオン URL にはアプリの応答 URL (例として https://localhost を設定します。
+7. アプリを作成したら、そのアプリのアプリケーション ID をメモします。
+8. [設定] を選択し、[必要なアクセス許可] を選択します。
+9. [+ 追加] から [Azure Key Vault] を選択します。
+10. [Have full access to the Azure Key Vault service] を選択して保存を押下します。
 
-## �A�v���̐ݒ���e�̕ύX
+## アプリの設定内容の変更
 
-AccessKeyVaultforNativeApp.ps1 ���J���A�ȉ��̉ӏ���o�^�����A�v���ɍ��킹�ĕύX���܂��B$tenantId ���M�Ђ̃e�i���g�ɁA$clientId ��o�^�����A�v���� ID �ɕύX���������B
+AccessKeyVaultFromNativeApp.ps1 を開き、以下の箇所を登録したアプリに合わせて変更します。$tenantId を貴社のテナントに、$clientId を登録したアプリの ID に変更ください。
 
 ```powershell
 $tenantId = "yourtenant.onmicrosoft.com" 
@@ -28,14 +28,14 @@ $clientId = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXX"
 $redirectUri = "https://localhost"
 ```
 
-�܂��A�X�N���v�g�̒��قǂɂ���Key Vault �� URL ���M�Ђł������̂��̂ɕύX���������B�T���v���ł́A�ȉ��̂悤�ɂ��Ă���܂����A����� SQLPassword �Ƃ����V�[�N���b�g�̒l���擾����Ƃ�����ł��B
+また、スクリプトの中ほどにあるKey Vault の URL を貴社でお持ちのものに変更ください。サンプルでは、以下のようにしておりますが、これは SQLPassword というシークレットの値を取得するという例です。
 
 ```powershell
 $url = "https://yourkeyvault.vault.azure.net/secrets/SQLPassword?api-version=2016-10-01"
 ```
 
-## �A�v���̎��s
+## アプリの実行
 
-GetModuleByNuget.ps1 �����s���������B���s����ƁATools �t�H���_�[���ł��A�t�H���_�[���ɕK�v�ȃ��W���[�����z�u����܂��B�{�X�N���v�g�́A������� AccessKeyVaultforNativeApp.ps1 �̎��s�ɕK�v�ȃ��W���[�����擾���Ă��邽�߂̂��̂ł��B
+GetAdModuleByNuget.ps1 を実行ください。実行すると、Tools フォルダーができ、フォルダー内に必要なモジュールが配置されます。本スクリプトは、もう一つの AccessKeyVaultFromNativeApp.ps1 の実行に必要なモジュールを取得してくるためのものです。
 
-���̏�ԂŁA���O�ɓ��e���M�Ђɍ��킹�Ă����� AccessKeyVaultforNativeApp.ps1 �����s���������B�F�؉�ʂ��\������A�T�C���C�����邱�ƂŁA���̃��[�U�[�� Key Vault �ɃA�N�Z�X���܂��B
+この状態で、事前に内容を貴社に合わせておいた AccessKeyVaultFromNativeApp.ps1 を実行ください。認証画面が表示され、サインインすることで、そのユーザーで Key Vault にアクセスします。
