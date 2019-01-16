@@ -17,6 +17,8 @@ Shows how to access Azure Key Vault from PowerShell
 9. [+ 追加] から [Azure Key Vault] を選択します。
 10. [Have full access to the Azure Key Vault service] を選択して保存を押下します。
 
+続いて、キー コンテナーを作成します。
+
 1. Azure ポータルに管理者でサインインします。
 2. [キー コンテナー] を開きます。
 3. [+ 追加] から keyvlt-prod-kv1 という名前でキーコンテナーを作成します。
