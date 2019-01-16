@@ -365,7 +365,7 @@ Function Verify-KeyVaultplainByteArrayRsa256Local {
     $sha256 = New-Object System.Security.Cryptography.SHA256CryptoServiceProvider
     $base64 = Convert-FromBase64UrlToBase64($signatureBase64Url)
     $byteArray = [convert]::FromBase64String($base64)
-    $result = $rsa.VerifyplainByteArray($plainByteArray, $sha256, $byteArray)
+    $result = $rsa.VerifyData($plainByteArray, $sha256, $byteArray)
 
     return $result
 }
@@ -403,8 +403,8 @@ Function Convert-FromBase64ToBase64Url {
 # Get Access token
 #
 $accessToken = Get-KeyVaultUserAccessToken `
-            -tenantId "yourtenant.onmicrosoft.com" `
-            -clientId "FEDCBA98-7654-3210-FEDC-BA9876543210" `
+            -tenantId "jutakata02.onmicrosoft.com" `
+            -clientId "b10aaa97-2d73-46b2-900d-626b2e90581e" `
             -redirectUri "urn:ietf:wg:oauth:2.0:oob"
 
 #
@@ -436,7 +436,7 @@ $secretGet = Get-KeyVaultSecret `
             -vaultName "keyvlt-prod-kv1" `
             -secretName "testsecret"
 
-Write-Host "Secret: " + $secretGet.value
+Write-Host "Secret: " $secretGet.value
 
 #
 # Encrypt and decrypt via Key Vault
