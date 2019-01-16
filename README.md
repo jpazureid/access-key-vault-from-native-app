@@ -17,6 +17,15 @@ Shows how to access Azure Key Vault from PowerShell
 9. [+ 追加] から [Azure Key Vault] を選択します。
 10. [Have full access to the Azure Key Vault service] を選択して保存を押下します。
 
+1. Azure ポータルに管理者でサインインします。
+2. [キー コンテナー] を開きます。
+3. [+ 追加] から keyvlt-prod-kv1 という名前でキーコンテナーを作成します。
+4. 有効なサブスクリプションとリソース グループを選択します。
+5. アクセス ポリシーにスクリプトを実行する管理者の名前があることを確認します。
+6. アクセス ポリシーにスクリプトを実行する管理者の名前を選択します。
+7. [キーのアクセス許可] を選択し、すべての項目にチェックをつけます。
+8. [OK] を押し、キー コンテナーを作成します。
+
 ## アプリの実行
 
 まず、GetAdModuleByNuget.ps1 を実行します。実行すると Tools フォルダーができ、フォルダー内に必要なモジュールが配置されます。本スクリプトは、もう一つの AccessKeyVaultFromNativeApp.ps1 の実行に必要なモジュールを取得してくるためのものです。この状態で、事前に内容を貴社に合わせておいた AccessKeyVaultFromNativeApp.ps1 を実行します。
