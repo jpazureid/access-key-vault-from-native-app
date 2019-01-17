@@ -50,7 +50,7 @@ Shows how to access Azure Key Vault from PowerShell
 
 ### Key Vault アクセス用のアクセストークンの取得 (Get-KeyVaultUserAccessToken)
 
-NuGet から取得したモジュールの AcquireTokenAsync メソッドを用いてユーザー認証を行い、アクセストークンを取得します。
+NuGet から取得したモジュールの AcquireTokenAsync メソッドを用いてユーザー認証を行い、アクセストークンを取得します。-clientId に、上記手順で作成したアプリケーション ID を指定します。
 
 ```powershell
 $accessToken = Get-KeyVaultUserAccessToken `
