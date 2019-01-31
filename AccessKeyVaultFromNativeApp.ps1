@@ -378,7 +378,7 @@ Function Convert-FromBase64UrlToBase64 {
     )
 
     $missingCharacters = 4 - $base64Url.Length % 4
-    if(($missingCharacters -gt 0) -and ($missingCharacters -lt 4))
+    if($missingCharacters -gt 0)
     {
         $missingString = New-Object System.String -ArgumentList @( '=', $missingCharacters )
         $base64Url = $base64Url + $missingString       
